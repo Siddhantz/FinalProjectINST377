@@ -39,7 +39,7 @@ function cutRestaurantList(list){
 }
 
 function initMap(){
-  const carto = L.map('map').setView([38.95, -76.94], 13);
+  const carto = L.map('map').setView([38.94, -76.94], 13);
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
