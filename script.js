@@ -67,6 +67,19 @@ function markerPlace(array, map){
   })
 }
 
+function filterByType(list, type) {
+  const filteredList = [];
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i];
+      const itemType = item.type.toLowerCase();
+    
+    if (type === '' || itemType === type.toLowerCase()) {
+      filteredList.push(item);
+    }
+  }
+  return filteredList;
+}
+
 async function mainEvent() { // the async keyword means we can make API requests
   const mainForm = document.querySelector('.main_form');
 
@@ -76,6 +89,8 @@ async function mainEvent() { // the async keyword means we can make API requests
   const clearDataButton = document.querySelector('#data_clear');
   const generateListButton = document.querySelector('#generate');
   const textField = document.querySelector('#fire');
+  const typeFilter = document.querySelector('#type_filter');
+
   
   const loadAnimation = document.querySelector('#data_load_animation');
   loadAnimation.style.display = 'none';
@@ -137,6 +152,14 @@ async function mainEvent() { // the async keyword means we can make API requests
     localStorage.clear();
     console.log('localStorageCheck', localStorage.getItem('storedData'));
   })
+
+  typeFilter.addEventListener('change', (event) => {
+    console.log('type filter', event.target.value);
+    const filteredList = filterByType(currentList, event.target.value);
+    console.log(filteredList);
+    injectHTML(filteredList);
+    markerPlace(filteredList, carto);
+  });
 
 }
 
